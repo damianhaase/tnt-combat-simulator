@@ -1,0 +1,18 @@
+{
+  "_description": "A weak but fast enemy with no armor and a dagger.",
+  "name": "Goblin",
+  "strength": 9,
+  "dexterity": 10,
+  "speed": 10,
+  "luck": 9,
+  "constitution": 18,
+  "weapon": {
+    "name": "Dagger",
+    "dice": 1,
+    "adds": 2
+  },
+  "armor": {
+    "name": "Rags",
+    "protection": 0
+  }
+}

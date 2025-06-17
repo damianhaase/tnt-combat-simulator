@@ -1,0 +1,18 @@
+{
+  "_description": "A powerful brute with high health and heavy armor.",
+  "name": "Troll",
+  "strength": 18,
+  "dexterity": 8,
+  "speed": 10,
+  "luck": 7,
+  "constitution": 40,
+  "weapon": {
+    "name": "Club",
+    "dice": 4,
+    "adds": 1
+  },
+  "armor": {
+    "name": "Thick Hide",
+    "protection": 5
+  }
+}

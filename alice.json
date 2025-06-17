@@ -1,0 +1,18 @@
+{
+  "_description": "A well-armored warrior with balanced stats and a sword.",
+  "name": "Alice",
+  "strength": 14,
+  "dexterity": 13,
+  "speed": 12,
+  "luck": 10,
+  "constitution": 30,
+  "weapon": {
+    "name": "Longsword",
+    "dice": 3,
+    "adds": 2
+  },
+  "armor": {
+    "name": "Chainmail",
+    "protection": 4
+  }
+}

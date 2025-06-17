@@ -1,0 +1,18 @@
+{
+  "_description": "A moderately strong enemy with an axe and hide armor.",
+  "name": "Orc",
+  "strength": 12,
+  "dexterity": 10,
+  "speed": 11,
+  "luck": 10,
+  "constitution": 22,
+  "weapon": {
+    "name": "Axe",
+    "dice": 2,
+    "adds": 2
+  },
+  "armor": {
+    "name": "Hide",
+    "protection": 3
+  }
+}

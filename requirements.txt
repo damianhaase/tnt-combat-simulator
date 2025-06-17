@@ -1,0 +1,4 @@
+# Requirements for Tunnels & Trolls Combat Simulator
+# Currently uses only Python standard library (no third-party packages)
+
+# Python 3.9 or later recommended
