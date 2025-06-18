@@ -1,5 +1,6 @@
 
 import unittest
+import random
 from unittest.mock import patch
 from combat import Character, Weapon, Armor, battle, distribute_damage, apply_spite
 
@@ -56,6 +57,7 @@ class TestCombatSystem(unittest.TestCase):
 
     def test_mock_battle(self):
         # Run a short mock battle and ensure one team wins
+        random.seed(0)
         team1 = [self.hero]
         team2 = [self.goblin]
         battle(team1, team2)
