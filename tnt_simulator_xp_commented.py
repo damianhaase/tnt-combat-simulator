@@ -87,7 +87,14 @@ def encounter_loop():
         while any(c.is_alive() for c in team1) and any(c.is_alive() for c in team2):
             print(f"\n--- Round {round_num} ---")
             from combat import combat_round  # Import here to ensure it's available
-            combat_round(team1, team2)
+            winner, diff = combat_round(team1, team2)
+
+            # Award XP for the round per Tunnels & Trolls rules
+            if winner == 1:
+                award_xp([c for c in team1 if c.is_alive()], diff)
+            elif winner == 2:
+                award_xp([c for c in team2 if c.is_alive()], diff)
+
             round_num += 1
 
             # Between rounds, offer choices
@@ -108,13 +115,13 @@ def encounter_loop():
         for c in team2:
             print(f"{c.name}: {'Alive' if c.is_alive() else 'Defeated'} (CON: {c.con})")
 
-        # Determine winner and award XP
+        # Determine final winner for information only
         if any(c.is_alive() for c in team1) and not any(c.is_alive() for c in team2):
-            award_xp(team1, 100)
+            print("Team 1 is victorious!")
         elif any(c.is_alive() for c in team2) and not any(c.is_alive() for c in team1):
-            award_xp(team2, 100)
+            print("Team 2 is victorious!")
         else:
-            print("No XP awarded due to disengagement or mutual defeat.")
+            print("The battle ended without a clear winner.")
 
         # Ask user if they want to start another encounter
         again = input("\nStart another encounter? (Y/N): ").strip().upper()
