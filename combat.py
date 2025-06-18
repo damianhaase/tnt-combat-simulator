@@ -72,15 +72,13 @@ class Character:
     def is_alive(self):
         return self.con > 0
 
-    # Roll weapon damage and add combat adds
+    # Roll weapon damage and count spite from the same dice
     def roll_attack(self):
-        base_damage = self.weapon.roll_damage()
+        rolls = [random.randint(1, 6) for _ in range(self.weapon.dice)]
+        spite = rolls.count(6)
+        base_damage = sum(rolls) + self.weapon.adds
         total = base_damage + self.adds
-        return total, base_damage
-
-    # Count number of 6s for spite damage
-    def roll_spite(self):
-        return self.weapon.count_spite()
+        return total, base_damage, spite
 
     # Convert to dictionary for saving
     def to_dict(self):
@@ -123,15 +121,15 @@ def combat_round(team1: List[Character], team2: List[Character]):
 
     for member in team1:
         if member.is_alive():
-            attack, _ = member.roll_attack()
+            attack, _, spite = member.roll_attack()
             team1_attack += attack
-            team1_spite += member.roll_spite()
+            team1_spite += spite
 
     for member in team2:
         if member.is_alive():
-            attack, _ = member.roll_attack()
+            attack, _, spite = member.roll_attack()
             team2_attack += attack
-            team2_spite += member.roll_spite()
+            team2_spite += spite
 
     print(f"Team 1 Attack Total: {team1_attack} | Spite: {team1_spite}")
     print(f"Team 2 Attack Total: {team2_attack} | Spite: {team2_spite}")
