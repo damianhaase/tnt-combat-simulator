@@ -63,7 +63,7 @@ def team_builder():
                 save_character(char, filename)
     return team
 
-# Grant XP to all characters on the given team
+# Grant XP to all characters on the given team and display the total gained
 def award_xp(team, amount):
     for char in team:
         if hasattr(char, 'xp'):
@@ -84,16 +84,18 @@ def encounter_loop():
 
         print("\n=== STARTING ENCOUNTER ===")
         round_num = 1
+        xp_team1 = 0
+        xp_team2 = 0
         while any(c.is_alive() for c in team1) and any(c.is_alive() for c in team2):
             print(f"\n--- Round {round_num} ---")
             from combat import combat_round  # Import here to ensure it's available
             winner, diff = combat_round(team1, team2)
 
-            # Award XP for the round per Tunnels & Trolls rules
+            # Track XP earned this round but don't award yet
             if winner == 1:
-                award_xp([c for c in team1 if c.is_alive()], diff)
+                xp_team1 += diff
             elif winner == 2:
-                award_xp([c for c in team2 if c.is_alive()], diff)
+                xp_team2 += diff
 
             round_num += 1
 
@@ -115,11 +117,15 @@ def encounter_loop():
         for c in team2:
             print(f"{c.name}: {'Alive' if c.is_alive() else 'Defeated'} (CON: {c.con})")
 
-        # Determine final winner for information only
-        if any(c.is_alive() for c in team1) and not any(c.is_alive() for c in team2):
+        # Determine final winner and award accumulated XP
+        team1_alive = any(c.is_alive() for c in team1)
+        team2_alive = any(c.is_alive() for c in team2)
+        if team1_alive and not team2_alive:
             print("Team 1 is victorious!")
-        elif any(c.is_alive() for c in team2) and not any(c.is_alive() for c in team1):
+            award_xp([c for c in team1 if c.is_alive()], xp_team1)
+        elif team2_alive and not team1_alive:
             print("Team 2 is victorious!")
+            award_xp([c for c in team2 if c.is_alive()], xp_team2)
         else:
             print("The battle ended without a clear winner.")
 

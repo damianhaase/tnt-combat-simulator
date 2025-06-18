@@ -32,7 +32,8 @@ python tnt_simulator_xp_commented.py
    - Run combat rounds
    - Disengage, continue, or quit
    - View end-of-battle summaries
-  - XP is awarded each round based on the difference in attack totals
+  - XP is tallied each round based on the difference in attack totals
+  - The accumulated XP is awarded to the winning team at the end of combat
 
 ---
 
