@@ -101,10 +101,10 @@ def encounter_loop():
 
         # Show end-of-encounter results
         print("\n=== ENCOUNTER OVER ===")
-        print("Team 1 Survivors:")
+        print("Team 1 Status:")
         for c in team1:
             print(f"{c.name}: {'Alive' if c.is_alive() else 'Defeated'} (CON: {c.con})")
-        print("Team 2 Survivors:")
+        print("Team 2 Status:")
         for c in team2:
             print(f"{c.name}: {'Alive' if c.is_alive() else 'Defeated'} (CON: {c.con})")
 
