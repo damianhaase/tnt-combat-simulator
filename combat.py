@@ -137,14 +137,22 @@ def combat_round(team1: List[Character], team2: List[Character]):
     # Higher total wins and deals damage
     if team1_attack > team2_attack:
         distribute_damage(team2, team1_attack - team2_attack)
+        winner = 1
+        diff = team1_attack - team2_attack
     elif team2_attack > team1_attack:
         distribute_damage(team1, team2_attack - team1_attack)
+        winner = 2
+        diff = team2_attack - team1_attack
     else:
         print("It's a draw! No damage dealt.")
+        winner = 0
+        diff = 0
 
     # Apply spite damage to both teams
     apply_spite(team2, team1_spite)
     apply_spite(team1, team2_spite)
+
+    return winner, diff
 
 
 # Split incoming damage evenly among all living characters on a team
