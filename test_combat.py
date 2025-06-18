@@ -1,6 +1,7 @@
 
 import unittest
 import random
+from unittest.mock import patch
 from combat import Character, Weapon, Armor, battle, distribute_damage, apply_spite
 
 # This test suite verifies functionality of the combat system
@@ -62,6 +63,20 @@ class TestCombatSystem(unittest.TestCase):
         battle(team1, team2)
         self.assertTrue(any(c.is_alive() for c in team1))
         self.assertFalse(any(c.is_alive() for c in team2))
+
+    def test_simultaneous_defeat(self):
+        # When both teams have no living members, no one should win
+        dead1 = Character("Dead1", 10, 10, 10, 10, 0, self.dagger, self.none)
+        dead2 = Character("Dead2", 10, 10, 10, 10, 0, self.dagger, self.none)
+        team1 = [dead1]
+        team2 = [dead2]
+
+        with patch('builtins.print') as mock_print:
+            battle(team1, team2)
+
+        self.assertFalse(any(c.is_alive() for c in team1))
+        self.assertFalse(any(c.is_alive() for c in team2))
+        mock_print.assert_any_call("\nNo one wins the battle!")
 
 
 if __name__ == '__main__':

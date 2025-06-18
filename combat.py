@@ -179,6 +179,13 @@ def battle(team1: List[Character], team2: List[Character]):
         combat_round(team1, team2)
         round_num += 1
 
-    # Announce winning team
-    winner = "Team 1" if any(c.is_alive() for c in team1) else "Team 2"
+    # Check who is still standing after the loop
+    team1_alive = any(c.is_alive() for c in team1)
+    team2_alive = any(c.is_alive() for c in team2)
+
+    if not team1_alive and not team2_alive:
+        winner = "No one"
+    else:
+        winner = "Team 1" if team1_alive else "Team 2"
+
     print(f"\n{winner} wins the battle!")
